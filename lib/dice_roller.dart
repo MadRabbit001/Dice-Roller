@@ -13,7 +13,9 @@ class DiceRoller extends StatefulWidget {
 }
 
 class _DiceRollerState extends State<DiceRoller> {
-  var image = 'assets/images/dice-1.png';
+  var image1 = 'assets/images/dice-1.png';
+  var image2 = 'assets/images/dice-6.png';
+
 
   void rollDiceAnimation() {
     const animationDuration = Duration(milliseconds: 150);
@@ -22,8 +24,10 @@ class _DiceRollerState extends State<DiceRoller> {
     Timer.periodic(animationDuration, (timer) {
       if (currentStep < animationSteps) {
         // Generate a random number to simulate dice rolling animation.
-        var num = Random().nextInt(6) + 1;
-        image = 'assets/images/dice-$num.png';
+        var num1 = Random().nextInt(6) + 1;
+        var num2 = Random().nextInt(6) + 1;
+        image1 = 'assets/images/dice-$num1.png';
+        image2 = 'assets/images/dice-$num2.png';
         currentStep++;
         // Call setState to rebuild the UI and display the new image.
         setState(() {});
@@ -37,11 +41,14 @@ class _DiceRollerState extends State<DiceRoller> {
   }
 
   void rollDice() {
-    var num = Random().nextInt(6) + 1;
-    print(num);
+    var num1 = Random().nextInt(6) + 1;
+    var num2 = Random().nextInt(6) + 1;
+    print(num1);
+    print(num2);
 
     setState(() {
-      image = 'assets/images/dice-$num.png';
+      image1 = 'assets/images/dice-$num1.png';
+      image2 = 'assets/images/dice-$num2.png';
     });
   }
 
@@ -51,7 +58,11 @@ class _DiceRollerState extends State<DiceRoller> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          image,
+          image1,
+          width: 200,
+        ),
+        Image.asset(
+          image2,
           width: 200,
         ),
         const SizedBox(height: 20),
