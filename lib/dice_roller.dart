@@ -15,7 +15,8 @@ class DiceRoller extends StatefulWidget {
 class _DiceRollerState extends State<DiceRoller> {
   var image1 = 'assets/images/dice-1.png';
   var image2 = 'assets/images/dice-6.png';
-
+  var isTwo = true;
+  var diceAmount = 'Two Dices';
 
   void rollDiceAnimation() {
     const animationDuration = Duration(milliseconds: 150);
@@ -52,18 +53,48 @@ class _DiceRollerState extends State<DiceRoller> {
     });
   }
 
+  void toggleTwoDices(){
+    setState(() {
+      isTwo = !isTwo;
+      diceAmount = isTwo?'Two Dices':'One Dice';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          image1,
-          width: 200,
-        ),
-        Image.asset(
-          image2,
-          width: 200,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+              onPressed: toggleTwoDices,
+              style: TextButton.styleFrom(
+                // padding: const EdgeInsets.only(top: 20),
+                foregroundColor: Colors.white,
+                textStyle: const TextStyle(
+                  fontSize: 28,
+                ),
+              ),
+              child: Text('Change To $diceAmount'),
+            )
+          ],
+        )
+        ,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if(!isTwo)
+            Image.asset(
+            image1,
+            width: 200,
+          ),
+            Image.asset(
+              image2,
+              width: 200,
+            ),]
+
         ),
         const SizedBox(height: 20),
         TextButton(
